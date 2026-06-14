@@ -69,29 +69,22 @@ function showToast(message) {
 document.querySelectorAll(".card").forEach((card) => {
   const productId = card.dataset.id;
 
-  card.querySelectorAll(".track img").forEach((img) => {
-    img.style.cursor = "pointer";
-
-    img.addEventListener("click", () => {
-      window.location.href = `product.html?id=${productId}`;
-    });
-  });
-
   const track = card.querySelector(".track");
   const images = card.querySelectorAll(".track img");
   const nextBtn = card.querySelector(".next");
   const prevBtn = card.querySelector(".prev");
+  const slider = card.querySelector(".slider");
 
   let index = 0;
 
-
   function updateSlider() {
-  const slider = card.querySelector(".slider");
-  const width = slider.clientWidth;
+    const width = slider.clientWidth;
+    track.style.transform = `translateX(${-index * width}px)`;
+  }
 
-  track.style.transform = `translateX(${-index * width}px)`;
-}
-
+  // =========================
+  // ⬅️➡️ СТРЕЛКИ (ТОЛЬКО СЛАЙДЕР)
+  // =========================
   nextBtn.addEventListener("click", (e) => {
     e.stopPropagation();
 
@@ -110,8 +103,19 @@ document.querySelectorAll(".card").forEach((card) => {
     }
   });
 
+  // =========================
+  // 🖼 КЛИК ПО КАРТИНКЕ → ОТКРЫТЬ ТОВАР
+  // =========================
+  images.forEach((img) => {
+    img.addEventListener("click", (e) => {
+      e.stopPropagation();
+      window.location.href = `product.html?id=${productId}`;
+    });
+  });
+
   updateSlider();
 });
+
 
 const applyBtn = document.getElementById("applyFilters");
 
@@ -196,83 +200,6 @@ if (applyBtn) {
 });
 }
 
-applyBtn.addEventListener("click", () => {
-
-  const search = document
-    .getElementById("searchInput")
-    .value
-    .trim()
-    .toLowerCase();
-
-  const category = document
-    .getElementById("categoryFilter")
-    .value;
-
-  const minPrice =
-    Number(document.getElementById("minPrice").value) || 0;
-
-  const maxPrice =
-    Number(document.getElementById("maxPrice").value) || Infinity;
-
-  const productsContainer = document.getElementById("products");
-
-  let cards = Array.from(document.querySelectorAll(".card"));
-
-  cards.forEach(card => {
-
-    // ✅ безопасное получение текста
-    const titleEl = card.querySelector("h3");
-    const title = titleEl
-      ? titleEl.textContent.trim().toLowerCase()
-      : "";
-
-    const price = Number(
-      (card.dataset.price || "0").replace(/\s/g, "")
-    );
-
-    const categoryValue = card.dataset.category || "";
-
-    const matchesSearch =
-      search === "" || title.includes(search);
-
-    const matchesCategory =
-      category === "" || categoryValue === category;
-
-    const matchesPrice =
-      price >= minPrice && price <= maxPrice;
-
-    if (matchesSearch && matchesCategory && matchesPrice) {
-      card.style.display = "block";
-    } else {
-      card.style.display = "none";
-    }
-
-  });
-
-  // сортировка
-  const sortValue =
-    document.getElementById("sortPrice").value;
-
-  let visibleCards = cards.filter(
-    card => card.style.display !== "none"
-  );
-
-  visibleCards.sort((a, b) => {
-
-    const priceA = Number(a.dataset.price || 0);
-    const priceB = Number(b.dataset.price || 0);
-
-    if (sortValue === "asc") return priceA - priceB;
-    if (sortValue === "desc") return priceB - priceA;
-
-    return 0;
-  });
-
-  visibleCards.forEach(card => {
-    productsContainer.appendChild(card);
-  });
-
-});
 
 const resetBtn = document.getElementById("resetFilters");
 
