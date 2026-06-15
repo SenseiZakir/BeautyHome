@@ -1,7 +1,8 @@
+let isSearching = false;
 function addToCart(name, price, image) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  let existingItem = cart.find(item => item.name === name);
+  let existingItem = cart.find((item) => item.name === name);
 
   if (existingItem) {
     existingItem.quantity += 1;
@@ -11,7 +12,7 @@ function addToCart(name, price, image) {
       name,
       price,
       image,
-      quantity: 1
+      quantity: 1,
     });
 
     showToast("Добавлено в корзину");
@@ -107,106 +108,99 @@ document.querySelectorAll(".card").forEach((card) => {
   // 🖼 КЛИК ПО КАРТИНКЕ → ОТКРЫТЬ ТОВАР
   // =========================
   images.forEach((img) => {
-    img.addEventListener("click", (e) => {
-      e.stopPropagation();
-      window.location.href = `product.html?id=${productId}`;
-    });
+  img.addEventListener("click", (e) => {
+    if (isSearching) return; // 🔥 БЛОК
+
+    e.stopPropagation();
+    window.location.href = `product.html?id=${productId}`;
   });
+});
+
+card.addEventListener("click", (e) => {
+  if (isSearching) {
+    e.preventDefault();
+    e.stopPropagation();
+    return;
+  }
+});
 
   updateSlider();
 });
 
-
 const applyBtn = document.getElementById("applyFilters");
 
 if (applyBtn) {
-
   applyBtn.addEventListener("click", () => {
+    const search = document
+      .getElementById("searchInput")
+      .value.trim()
+      .toLowerCase();
 
-  const search = document
-    .getElementById("searchInput")
-    .value
-    .trim()
-    .toLowerCase();
+    const category = document.getElementById("categoryFilter").value;
 
-  const category = document
-    .getElementById("categoryFilter")
-    .value;
+    const minPrice = Number(document.getElementById("minPrice").value) || 0;
 
-  const minPrice =
-    Number(document.getElementById("minPrice").value) || 0;
+    const maxPrice =
+      Number(document.getElementById("maxPrice").value) || Infinity;
 
-  const maxPrice =
-    Number(document.getElementById("maxPrice").value) || Infinity;
+    const productsContainer = document.getElementById("products");
 
-  const productsContainer = document.getElementById("products");
+    let cards = Array.from(document.querySelectorAll(".card"));
 
-  let cards = Array.from(document.querySelectorAll(".card"));
+    cards.forEach((card) => {
+      // 🔥 БЕЗОПАСНЫЙ ЗАГОЛОВОК (ВАЖНО)
+      let title = "";
 
-  cards.forEach(card => {
+      const h3 = card.querySelector("h3");
+      if (h3 && h3.textContent) {
+        title = h3.textContent.toLowerCase().trim();
+      }
 
-    // 🔥 БЕЗОПАСНЫЙ ЗАГОЛОВОК (ВАЖНО)
-    let title = "";
+      const price = Number((card.dataset.price || "0").replace(/\s/g, ""));
 
-    const h3 = card.querySelector("h3");
-    if (h3 && h3.textContent) {
-      title = h3.textContent.toLowerCase().trim();
-    }
+      const categoryValue = card.dataset.category || "";
 
-    const price = Number(
-      (card.dataset.price || "0").replace(/\s/g, "")
-    );
+      // 🔥 ИСПРАВЛЕННЫЙ ПОИСК
+      const productData = products.find((p) => p.id == card.dataset.id);
 
-    const categoryValue = card.dataset.category || "";
+      const matchesSearch =
+        search === "" ||
+        title.includes(search) ||
+        (productData && productData.keywords.some((k) => k.includes(search)));
 
-    // 🔥 ИСПРАВЛЕННЫЙ ПОИСК
-    const matchesSearch =
-      search === "" || title.includes(search);
+      const matchesCategory = category === "" || categoryValue === category;
 
-    const matchesCategory =
-      category === "" || categoryValue === category;
+      const matchesPrice = price >= minPrice && price <= maxPrice;
 
-    const matchesPrice =
-      price >= minPrice && price <= maxPrice;
+      card.style.display =
+        matchesSearch && matchesCategory && matchesPrice ? "block" : "none";
+    });
 
-    card.style.display =
-      (matchesSearch && matchesCategory && matchesPrice)
-        ? "block"
-        : "none";
+    // сортировка
+    const sortValue = document.getElementById("sortPrice").value;
+
+    let visibleCards = cards.filter((card) => card.style.display !== "none");
+
+    visibleCards.sort((a, b) => {
+      const priceA = Number(a.dataset.price || 0);
+      const priceB = Number(b.dataset.price || 0);
+
+      if (sortValue === "asc") return priceA - priceB;
+      if (sortValue === "desc") return priceB - priceA;
+
+      return 0;
+    });
+
+    visibleCards.forEach((card) => {
+      productsContainer.appendChild(card);
+    });
   });
-
-  // сортировка
-  const sortValue =
-    document.getElementById("sortPrice").value;
-
-  let visibleCards = cards.filter(
-    card => card.style.display !== "none"
-  );
-
-  visibleCards.sort((a, b) => {
-    const priceA = Number(a.dataset.price || 0);
-    const priceB = Number(b.dataset.price || 0);
-
-    if (sortValue === "asc") return priceA - priceB;
-    if (sortValue === "desc") return priceB - priceA;
-
-    return 0;
-  });
-
-  visibleCards.forEach(card => {
-    productsContainer.appendChild(card);
-  });
-
-});
 }
-
 
 const resetBtn = document.getElementById("resetFilters");
 
 if (resetBtn) {
-
   resetBtn.addEventListener("click", () => {
-
     // очищаем поля
     document.getElementById("searchInput").value = "";
     document.getElementById("categoryFilter").value = "";
@@ -215,12 +209,10 @@ if (resetBtn) {
     document.getElementById("sortPrice").value = "";
 
     // показываем все товары
-    document.querySelectorAll(".card").forEach(card => {
+    document.querySelectorAll(".card").forEach((card) => {
       card.style.display = "block";
     });
-
   });
-
 }
 
 function openFilters() {
@@ -242,4 +234,142 @@ window.addEventListener("load", () => {
     }, 800);
   }
 });
+
+const homeLinks = document.querySelectorAll(".homeLink");
+
+homeLinks.forEach((link) => {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+});
+
+document.getElementById("catalogLink").addEventListener("click", function (e) {
+  e.preventDefault();
+
+  document.getElementById("catalog").scrollIntoView({
+    behavior: "smooth",
+  });
+});
+
+const bannerCatalogBtn = document.getElementById("bannerCatalogBtn");
+
+if (bannerCatalogBtn) {
+  bannerCatalogBtn.addEventListener("click", () => {
+    document.getElementById("catalog").scrollIntoView({
+      behavior: "smooth",
+    });
+  });
+}
+
+const searchBtn = document.getElementById("searchBtn");
+const headerSearch = document.getElementById("headerSearch");
+
+function searchProduct() {
+  const query = headerSearch.value.trim().toLowerCase();
+
+  if (!query) return;
+
+  const matches = products
+    .map(p => {
+      let score = 0;
+
+      const title = p.title.toLowerCase();
+      const keywords = (p.keywords || []).map(k => k.toLowerCase());
+
+      // 1. точное совпадение названия (самый сильный)
+      if (title === query) score += 100;
+
+      // 2. название содержит запрос
+      if (title.includes(query)) score += 50;
+
+      // 3. keywords точное совпадение
+      if (keywords.includes(query)) score += 40;
+
+      // 4. keywords содержит запрос
+      if (keywords.some(k => k.includes(query))) score += 20;
+
+      // 5. мягкое совпадение (убираем мн. число)
+      const normalized = query.replace(/ы$|а$|и$/g, "");
+
+      if (title.includes(normalized)) score += 10;
+
+      return { product: p, score };
+    })
+    .filter(item => item.score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  if (matches.length === 0) {
+    showToast("Товар не найден");
+    return;
+  }
+
+  // 🔥 ВАЖНО: всегда берём самый релевантный
+  window.location.href = `product.html?id=${matches[0].product.id}`;
+}
+
+searchBtn.addEventListener("click", searchProduct);
+
+headerSearch.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    searchProduct();
+  }
+});
+
+function matchProduct(product, query) {
+  const q = query.toLowerCase().trim();
+
+  const title = product.title.toLowerCase();
+
+  // 🔥 нормализация множественного числа
+  const normalizedKeywords = (product.keywords || []).map(k =>
+    k.toLowerCase()
+  );
+
+  return (
+    title.includes(q) ||
+    normalizedKeywords.includes(q) ||
+    normalizedKeywords.some(k => k.includes(q)) ||
+    title.includes(q.replace("ы", "").replace("а", ""))
+  );
+}
+
+function normalizeQuery(q) {
+  return q
+    .toLowerCase()
+    .trim()
+    .replace(/ы$/g, "")
+    .replace(/и$/g, "")
+    .replace(/а$/g, "");
+}
+
+function getMatchScore(product, query) {
+  const title = product.title.toLowerCase();
+  const keywords = (product.keywords || []).map(k => k.toLowerCase());
+
+  let score = 0;
+
+  // 1. точное совпадение (самый высокий приоритет)
+  if (title === query) score += 100;
+
+  // 2. ключевые слова точное совпадение
+  if (keywords.includes(query)) score += 90;
+
+  // 3. название содержит запрос
+  if (title.includes(query)) score += 50;
+
+  // 4. ключевые слова содержат
+  if (keywords.some(k => k.includes(query))) score += 30;
+
+  // 5. нормализация (кровать/кровати)
+  const normTitle = normalizeQuery(title);
+  if (normTitle.includes(query)) score += 20;
+
+  return score;
+}
+
 
