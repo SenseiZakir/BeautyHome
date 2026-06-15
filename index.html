@@ -11,7 +11,7 @@
 
 <header class="header">
 
-  <a href="index.html" class="logo-wrap">
+  <a href="index.html" class="logo-wrap homeLink">
 
     <img
       src="images/Logo.png"
@@ -25,11 +25,25 @@
 
   </a>
 
-  <input type="text" class="search" placeholder="Поиск мебели...">
+<div class="search-box">
+
+  <input
+    type="text"
+    class="search"
+    id="headerSearch"
+    placeholder="Поиск мебели..."
+  >
+
+  <button id="searchBtn" class="search-btn">
+    🔍
+  </button>
+
+</div>
+
 
   <nav class="nav">
-  <a href="index.html" class="nav-link">Главная</a>
-  <a href="catalog.html" class="nav-link">Каталог</a>
+  <a href="#" class="nav-link homeLink">Главная</a>
+  <a href="#catalog" class="nav-link" id="catalogLink">Каталог</a>
   <a href="checkout.html" class="nav-link">Корзина</a>
   <a href="#" class="nav-link">Доставка</a>
   <a href="#" class="nav-link">Контакты</a>
@@ -47,7 +61,7 @@
   <div>
     <h1>Создайте дом своей мечты</h1>
     <p>Современная мебель для комфортной жизни</p>
-    <button>Смотреть каталог</button>
+    <button id="bannerCatalogBtn">Смотреть каталог</button>
   </div>
 </section>
 
@@ -99,7 +113,7 @@
   </div>
 </section>
 
-<section class="catalog">
+<section class="catalog" id="catalog">
 
   <aside class="filters">
     <h3>Фильтры</h3>
@@ -528,8 +542,18 @@
   В корзину
 </button>
 
+
+
+  
+
+  
+
+</section>
+<div id="toast"></div>
+<!-- overlay (фон затемнения) -->
 <div id="overlay" onclick="closeFilters()"></div>
 
+<!-- боковые фильтры -->
 <aside id="sidebarFilters">
   <h3>Фильтры</h3>
 
@@ -540,6 +564,12 @@
     <option value="Диваны">Диваны</option>
     <option value="Кровати">Кровати</option>
     <option value="Кресла и стулья">Кресла и стулья</option>
+    <option value="Тумбы">Тумбы</option>
+    <option value="Прикроватные тумбы">Прикроватные тумбы</option>
+    <option value="ТВ-Тумбы">ТВ-Тумбы</option>
+    <option value="Консоли">Консоли</option>
+    <option value="Столики">Столики</option>
+    <option value="Пуфы">Пуфы</option>
   </select>
 
   <input type="number" id="minPrice" placeholder="Цена от">
@@ -548,15 +578,7 @@
   <button onclick="applyFilters()">Применить</button>
   <button onclick="resetFilters()">Сбросить</button>
 </aside>
-
-  </div>
-
-  
-
-  
-
-</section>
-<div id="toast"></div>
+<script src="js/products.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
