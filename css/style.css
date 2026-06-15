@@ -48,9 +48,8 @@ body {
 }
 
 .search {
-  flex: 1;
-  max-width: 500px;
-
+  width: 500px;
+  max-width: 100%;
   padding: 10px 12px;
   border-radius: 8px;
   border: none;
@@ -174,7 +173,7 @@ body {
 
   transition: 0.2s;
 
-  margin-bottom: 5px;
+  margin-bottom: 0px;
 }
 
 
@@ -637,6 +636,38 @@ select:focus {
   color: var(--primary);
 }
 
+#bannerCatalogBtn {
+  color: black;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.search-btn {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  cursor: pointer;
+
+  background: #2563eb;
+  color: white;
+
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+.search-btn:hover {
+  opacity: 0.9;
+}
+
 @keyframes shimmer {
   0% {
     background-position: 200% 0;
@@ -732,3 +763,4 @@ select:focus {
     padding: 15px;
   }
 }
+
