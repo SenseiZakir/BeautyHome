@@ -1,3 +1,6 @@
+const page = document.querySelector(".product-page");
+if (page) page.classList.add("hidden");
+
 const params = new URLSearchParams(window.location.search);
 const id = Number(params.get("id"));
 
@@ -7,18 +10,22 @@ if (!product) {
   document.body.innerHTML = "<h1>Товар не найден</h1>";
 }
 
-// HERO
+/* =========================
+   PRODUCT INFO
+========================= */
 document.querySelector("h1").textContent = product.title;
 document.querySelector(".price").textContent = product.price + " сом";
-
-// ОПИСАНИЕ
 document.querySelector(".description").textContent = product.description;
 
-// ГЛАВНАЯ КАРТИНКА
+/* =========================
+   MAIN IMAGE
+========================= */
 const mainImg = document.querySelector("#mainImage");
 mainImg.src = product.images[0];
 
-// МИНИАТЮРЫ
+/* =========================
+   THUMBS
+========================= */
 const thumbs = document.querySelector(".thumbnails");
 thumbs.innerHTML = "";
 
@@ -26,7 +33,6 @@ product.images.forEach((img, index) => {
   const image = document.createElement("img");
   image.src = img;
 
-  // первая картинка активная по умолчанию
   if (index === 0) {
     image.classList.add("active");
     mainImg.src = img;
@@ -35,24 +41,22 @@ product.images.forEach((img, index) => {
   image.addEventListener("click", () => {
     mainImg.src = img;
 
-    // убрать актив у всех
     document.querySelectorAll(".thumbnails img")
       .forEach(i => i.classList.remove("active"));
 
-    // поставить актив на текущую
     image.classList.add("active");
   });
 
   thumbs.appendChild(image);
 });
 
-
-
+/* =========================
+   CART BUTTON
+========================= */
 const addToCartBtn = document.getElementById("addToCartBtn");
 
-if (product && addToCartBtn) {
+if (addToCartBtn) {
   addToCartBtn.addEventListener("click", () => {
-
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     let existingItem = cart.find(item => item.name === product.title);
@@ -76,6 +80,9 @@ if (product && addToCartBtn) {
   });
 }
 
+/* =========================
+   TOAST
+========================= */
 let toastTimer;
 
 function showToast(message) {
@@ -89,7 +96,6 @@ function showToast(message) {
 
   toast.textContent = message;
 
-  // стиль (СИНИЙ)
   toast.style.position = "fixed";
   toast.style.bottom = "20px";
   toast.style.right = "20px";
@@ -101,7 +107,6 @@ function showToast(message) {
   toast.style.boxShadow = "0 10px 25px rgba(0,0,0,0.15)";
   toast.style.zIndex = "9999";
 
-  // reset анимации
   clearTimeout(toastTimer);
 
   toast.style.transition = "none";
@@ -117,5 +122,12 @@ function showToast(message) {
   toastTimer = setTimeout(() => {
     toast.style.opacity = "0";
     toast.style.transform = "translateY(20px)";
-  }, 1800);
+  }, 1500);
 }
+
+/* =========================
+   SHOW PAGE
+========================= */
+window.addEventListener("load", () => {
+  if (page) page.classList.remove("hidden");
+});
