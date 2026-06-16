@@ -38,6 +38,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
 
   padding: 14px 20px;
 
@@ -77,14 +78,16 @@ body {
 }
 
 .nav a {
+  background: #111;
+  padding: 8px 12px;
+  border-radius: 8px;
   color: #3d3d3d;
   text-decoration: none;
   font-size: 14px;
+  transition: 0.2s;
   opacity: 0.85;
 
-  background: #111; /* 🔥 чёрный фон */
-  padding: 8px 12px;
-  border-radius: 8px;
+
 
   transition: 0.2s;
 }
@@ -668,6 +671,27 @@ select:focus {
   opacity: 0.9;
 }
 
+.phone-header {
+  margin-left: auto;
+  color: #1c1f26;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.phone-header:hover {
+  color: #2563eb;
+}
+
+.card .track img {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.card .track img:hover {
+  transform: scale(1.03);
+}
+
 @keyframes shimmer {
   0% {
     background-position: 200% 0;
@@ -758,6 +782,11 @@ select:focus {
     padding: 30px 20px;
   }
 
+  .story-grid div {
+    font-size: 14px;
+    padding: 15px;
+  }
+}
   .story-grid div {
     font-size: 14px;
     padding: 15px;
