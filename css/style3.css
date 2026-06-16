@@ -8,26 +8,9 @@ body {
 }
 
 /* ===== HEADER ===== */
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 
-  padding: 15px 20px;
-  background: #fff;
-  border-bottom: 1px solid #e5e7eb;
-}
 
-.back-btn {
-  text-decoration: none;
-  color: #111;
-  font-weight: 500;
-}
 
-.logo {
-  font-weight: bold;
-  font-size: 18px;
-}
 
 /* ===== PAGE ===== */
 .product-page {
@@ -168,6 +151,110 @@ body {
 
 .whatsapp-btn:hover {
   background: #1ebd57;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+}
+
+/* ===== HEADER FROM MAIN SITE ===== */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 14px 20px;
+
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(10px);
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  text-decoration: none;
+  color: #111;
+}
+
+.logo-img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+}
+
+.nav a:hover {
+  color: #2563eb;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.search {
+  width: 400px;
+  max-width: 100%;
+
+  padding: 10px 12px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.search-btn {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  cursor: pointer;
+
+  background: #2563eb;
+  color: white;
+
+  border-radius: 8px;
+}
+
+.phone-header {
+  color: #1c1f26;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.phone-header:hover {
+  color: #2563eb;
 }
 
 /* ===== RESPONSIVE ===== */
