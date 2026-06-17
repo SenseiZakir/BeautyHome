@@ -32,6 +32,7 @@
     class="search"
     id="headerSearch"
     placeholder="Поиск мебели..."
+    data-placeholder="searchPlaceholder"
   >
 
   <button id="searchBtn" class="search-btn">
@@ -42,18 +43,23 @@
 
 
   <nav class="nav">
-  <a href="#" class="nav-link homeLink">Главная</a>
-  <a href="#catalog" class="nav-link" id="catalogLink">Каталог</a>
-  <a href="checkout.html" class="nav-link">Корзина</a>
-  <a href="services.html" class="nav-link">Услуги</a>
-  <a href="delivery.html" class="nav-link">Доставка</a>
-  <a href="contacts.html" class="nav-link">Контакты</a>
+  <a href="#" class="nav-link homeLink" data-lang="home">Главная</a>
+  <a href="#catalog" class="nav-link" id="catalogLink" data-lang="catalog">Каталог</a>
+  <a href="checkout.html" class="nav-link" data-lang="cart">Корзина</a>
+  <a href="services.html" class="nav-link" data-lang="services">Услуги</a>
+  <a href="delivery.html" class="nav-link" data-lang="delivery">Доставка</a>
+  <a href="contacts.html" class="nav-link" data-lang="contacts">Контакты</a>
 </nav>
 
   <div class="header-right">
     <a href="tel:+996555123456" class="phone-header">
       📞 +996 555 123 456
     </a>
+
+    <div class="lang-switcher">
+  <button id="ruBtn">RU</button>
+  <button id="kgBtn">KG</button>
+</div>
   </div>
 </header>
 
@@ -64,9 +70,9 @@
 
 <section class="big-banner">
   <div>
-    <h1>Создайте дом своей мечты</h1>
-    <p>Современная мебель для комфортной жизни</p>
-    <button id="bannerCatalogBtn">Смотреть каталог</button>
+    <h1 id="bannerTitle" data-lang="bannerTitle">Создайте дом своей мечты</h1>
+    <p id="bannerText" data-lang="bannerText">Современная мебель для комфортной жизни</p>
+    <button id="bannerCatalogBtn" data-lang="bannerBtn">Смотреть каталог</button>
   </div>
 </section>
 
@@ -77,20 +83,20 @@
   </div>
 
   <div class="about-content">
-    <h2>О компании Beauty Home</h2>
+    <h2 data-lang="aboutTitle">О компании Beauty Home</h2>
 
-    <p>
+    <p data-lang="aboutText1">
       Beauty Home — это современная мебель для дома,
       созданная с заботой о комфорте и стиле.
     </p>
 
-    <p>
+    <p data-lang="aboutTitle">
       Мы предлагаем кровати, диваны, консоли,
       тумбы, столики и другую мебель высокого качества
       по доступным ценам.
     </p>
 
-    <p>
+    <p data-lang="aboutText3">
       Наша цель — помочь каждому клиенту создать
       уютный интерьер своей мечты.
     </p>
@@ -108,48 +114,123 @@
 </section>
 
 <section class="story">
-  <h2>Почему выбирают нас</h2>
+
+  <h2 data-lang="whyUs">
+    Почему выбирают нас
+  </h2>
 
   <div class="story-grid">
-    <div>🛋 Качественная мебель</div>
-    <div>🚚 Быстрая доставка</div>
-    <div>💰 Доступные цены</div>
-    <div>🛠 Гарантия 1 год</div>
+
+    <div data-lang="adv1">
+      🛋 Качественная мебель
+    </div>
+
+    <div data-lang="adv2">
+      🚚 Быстрая доставка
+    </div>
+
+    <div data-lang="adv3">
+      💰 Доступные цены
+    </div>
+
+    <div data-lang="adv4">
+      🛠 Гарантия 1 год
+    </div>
+
   </div>
+
 </section>
 
 <section class="catalog" id="catalog">
 
   <aside class="filters">
-    <h3>Фильтры</h3>
+    <h3 data-lang="filters">Фильтры</h3>
 
-<input type="text" id="searchInput" placeholder="Поиск товара">
+<input type="text"
+id="searchInput"
+placeholder="Поиск товара"
+data-placeholder="productSearch">
 
 <select id="categoryFilter">
-  <option value="">Все категории</option>
 
-  <option value="Диваны">Диваны</option>
-  <option value="Кровати">Кровати</option>
-  <option value="Кресла и стулья">Кресла и стулья</option>
+<option value="" data-ru="Все категории" data-kg="Бардык категориялар">
+Все категории
+</option>
 
-  <option value="Тумбы">Тумбы</option>
-  <option value="Прикроватные тумбы">Прикроватные тумбы</option>
-  <option value="ТВ-Тумбы">ТВ-Тумбы</option>
+<option value="Диваны" data-ru="Диваны" data-kg="Дивандар">
+Диваны
+</option>
 
-  <option value="Консоли">Консоли</option>
-  <option value="Подвесные консоли">Подвесные консоли</option>
+<option value="Кровати" data-ru="Кровати" data-kg="Керебеттер">
+Кровати
+</option>
 
-  <option value="Столики">Столики</option>
-  <option value="Туалетные столики">Туалетные столики</option>
+<option value="Кресла и стулья" data-ru="Кресла и стулья" data-kg="Креслолор жана отургучтар">
+Кресла и стулья
+</option>
 
-  <option value="Банкетки">Банкетки</option>
-  <option value="Пуфы">Пуфы</option>
-  <option value="Пуфы будуарные">Пуфы будуарные</option>
+
+<option value="Тумбы" data-ru="Тумбы" data-kg="Тумбалар">
+Тумбы
+</option>
+
+<option value="Прикроватные тумбы" data-ru="Прикроватные тумбы" data-kg="Керебет жанындагы тумбалар">
+Прикроватные тумбы
+</option>
+
+
+<option value="ТВ-Тумбы" data-ru="ТВ-Тумбы" data-kg="ТВ тумбалар">
+ТВ-Тумбы
+</option>
+
+
+<option value="Консоли" data-ru="Консоли" data-kg="Консолдор">
+Консоли
+</option>
+
+
+<option value="Подвесные консоли" data-ru="Подвесные консоли" data-kg="Илме консолдор">
+Подвесные консоли
+</option>
+
+
+<option value="Столики" data-ru="Столики" data-kg="Столиктер">
+Столики
+</option>
+
+
+<option value="Туалетные столики" data-ru="Туалетные столики" data-kg="Косметикалык столдор">
+Туалетные столики
+</option>
+
+
+<option value="Банкетки" data-ru="Банкетки" data-kg="Отургучтар">
+Банкетки
+</option>
+
+
+<option value="Пуфы" data-ru="Пуфы" data-kg="Пуфтар">
+Пуфы
+</option>
+
+
+<option value="Пуфы будуарные" data-ru="Пуфы будуарные" data-kg="Будуардук пуфтар">
+Пуфы будуарные
+</option>
+
 </select>
 
-<input type="number" id="minPrice" placeholder="Цена от">
+<input
+type="number"
+id="minPrice"
+placeholder="Цена от"
+data-placeholder="priceFrom">
 
-<input type="number" id="maxPrice" placeholder="Цена до">
+<input
+type="number"
+id="maxPrice"
+placeholder="Цена до"
+data-placeholder="priceTo">
 
 <select id="sortPrice">
   <option value="">Без сортировки</option>
@@ -157,8 +238,13 @@
   <option value="desc">Цена ↓</option>
 </select>
 
-<button id="applyFilters">Применить</button>
-<button id="resetFilters">Сбросить</button>
+<button id="applyFilters" data-lang="apply">
+Применить
+</button>
+
+<button id="resetFilters" data-lang="reset">
+Сбросить
+</button>
   </aside>
 
   <div class="products" id="products">
@@ -188,11 +274,11 @@
       <button class="next">→</button>
     </div>
 
-    <h3>Банкетки</h3>
+    <h3 data-ru="Банкетки" data-kg="Отургучтар">Банкетки</h3>
     <p>16 000 сом</p>
 
     <button onclick="addToCart('Банкетки', 16000, 'images/Банкетки/Банкетка 1.jpg')">
-  В корзину
+  <span data-lang="addCart">В корзину</span>
 </button>
 
   </div>
@@ -216,11 +302,11 @@
       <button class="next">→</button>
     </div>
 
-    <h3>Пуфы будуарные</h3>
+    <h3 data-ru="Пуфы будуарные" data-kg="Будуардук пуфтар">Пуфы будуарные</h3>
     <p>16 000 сом</p>
 
     <button onclick="addToCart('Пуфы будуарные', 16000, 'images/Пуфы будуарные/Пуф 1.jpg')">
-  В корзину
+  <span data-lang="addCart">В корзину</span>
 </button>
 
   </div>
@@ -245,11 +331,11 @@
       <button class="next">→</button>
     </div>
 
-    <h3>Туалетные столики</h3>
+    <h3 data-ru="Туалетные столики" data-kg="Косметикалык столдор">Туалетные столики</h3>
     <p>16 000 сом</p>
 
     <button onclick="addToCart('Туалетные столики', 16000, 'images/Туалетные столики/Столик 2.jpg')">
-  В корзину
+  <span data-lang="addCart">В корзину</span>
 </button>
 
   </div>
@@ -273,11 +359,11 @@
       <button class="next">→</button>
     </div>
 
-    <h3>Кровати</h3>
+    <h3 data-ru="Кровати" data-kg="Керебеттер">Кровати</h3>
     <p>43 500 сом</p>
 
     <button onclick="addToCart('Кровати', 43500, 'images/Кровати/Кровать 1.jpg')">
-  В корзину
+  <span data-lang="addCart">В корзину</span>
 </button>
 
   </div>
@@ -301,11 +387,11 @@
       <button class="next">→</button>
     </div>
 
-    <h3>Консоли</h3>
+    <h3 data-ru="Консоли" data-kg="Консолдор">Консоли</h3>
     <p>43 500 сом</p>
 
     <button onclick="addToCart('Консоли', 43500, 'images/Консоли/Консоль 1.jpg')">
-  В корзину
+  <span data-lang="addCart">В корзину</span>
 </button>
 
   </div>
@@ -327,11 +413,11 @@
       <button class="next">→</button>
     </div>
 
-    <h3>Кресла и стулья</h3>
+    <h3 data-ru="Кресла и стулья" data-kg="Креслолор жана отургучтар">Кресла и стулья</h3>
     <p>23 500 сом</p>
 
     <button onclick="addToCart('Кресла и стулья', 23500, 'images/Кресла и стулья/Стул 1.jpg')">
-  В корзину
+  <span data-lang="addCart">В корзину</span>
 </button>
 
   </div>
@@ -357,11 +443,11 @@
       <button class="next">→</button>
     </div>
 
-    <h3>Диваны</h3>
+    <h3 data-ru="Диваны" data-kg="Дивандар">Диваны</h3>
     <p>23 500 сом</p>
 
     <button onclick="addToCart('Диваны', 23500, 'images/Диваны/Диван 1.jpg')">
-  В корзину
+  <span data-lang="addCart">В корзину</span>
 </button>
 
   </div>
@@ -384,11 +470,11 @@
       <button class="next">→</button>
     </div>
 
-    <h3>Тумбы</h3>
+    <h3 data-ru="Тумбы" data-kg="Тумбалар">Тумбы</h3>
     <p>23 500 сом</p>
 
     <button onclick="addToCart('Тумбы', 23500, 'images/Тумбы/Тумба 1.jpg')">
-  В корзину
+  <span data-lang="addCart">В корзину</span>
 </button>
 
   </div>
@@ -419,11 +505,11 @@
       <button class="next">→</button>
     </div>
 
-    <h3>Столики</h3>
+    <h3 data-ru="Столики" data-kg="Столиктер">Столики</h3>
     <p>23 500 сом</p>
 
     <button onclick="addToCart('Столики', 23500, 'images/Столики/Столики 1.jpg')">
-  В корзину
+  <span data-lang="addCart">В корзину</span>
 </button>
 
   </div>
@@ -447,11 +533,11 @@
       <button class="next">→</button>
     </div>
 
-    <h3>Пуфы</h3>
+    <h3 data-ru="Пуфы" data-kg="Пуфтар">Пуфы</h3>
     <p>23 500 сом</p>
 
     <button onclick="addToCart('Пуфы', 23500, 'images/Пуфы/Пуф 1.jpg')">
-  В корзину
+  <span data-lang="addCart">В корзину</span>
 </button>
 
   </div>
@@ -479,11 +565,11 @@
       <button class="next">→</button>
     </div>
 
-    <h3>Подвесные консоли</h3>
+    <h3 data-ru="Подвесные консоли" data-kg="Илме консолдор">Подвесные консоли</h3>
     <p>23 500 сом</p>
 
     <button onclick="addToCart('Подвесные консоли', 23500, 'images/Подвесные консоли/Консоль 2.jpg')">
-  В корзину
+  <span data-lang="addCart">В корзину</span>
 </button>
 
   </div>
@@ -511,11 +597,11 @@
       <button class="next">→</button>
     </div>
 
-    <h3>Прикроватные тумбы</h3>
+    <h3 data-ru="Прикроватные тумбы" data-kg="Керебет жанындагы тумбалар">Прикроватные тумбы</h3>
     <p>21 000 сом</p>
 
     <button onclick="addToCart('Прикроватные тумбы', 21000, 'images/Прикроватные тумбы/Тумба 1.jpg')">
-  В корзину
+  <span data-lang="addCart">В корзину</span>
 </button>
 
   </div>
@@ -540,11 +626,11 @@
       <button class="next">→</button>
     </div>
 
-    <h3>ТВ-Тумбы</h3>
+    <h3 data-ru="ТВ-Тумбы" data-kg="ТВ тумбалар">ТВ-Тумбы</h3>
     <p>21 000 сом</p>
 
     <button onclick="addToCart('ТВ-Тумбы', 21000, 'images/ТВ тумбы/Тумба 1.jpg')">
-  В корзину
+  <span data-lang="addCart">В корзину</span>
 </button>
 
 
