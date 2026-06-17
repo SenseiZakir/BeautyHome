@@ -1,98 +1,124 @@
-/* ===== ОБЩИЙ СТИЛЬ CHECKOUT ===== */
+/* =========================
+   CHECKOUT ONLY (FIXED)
+========================= */
+
+/* ❗ ВАЖНО: убрали flex с body, он ломал header */
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #f5f7fa, #e4e8f0);
-  margin: 0;
-  padding: 0;
 }
 
-/* ===== ЗАГОЛОВОК ===== */
+/* ===== PAGE TITLE ===== */
 h1 {
   text-align: center;
-  margin-top: 40px;
+  margin: 40px 0 20px;
   font-size: 28px;
   color: #222;
 }
 
-/* ===== ОСНОВНАЯ КАРТОЧКА ===== */
-.order-box {
+/* ===== BACK BUTTON ===== */
+.back-btn {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+/* ===== CENTER WRAPPER ONLY FOR CONTENT ===== */
+.order-box,
+.order-form,
+#result,
+#paymentResult {
+  width: 100%;
   max-width: 520px;
-  margin: 40px auto;
-  background: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== ORDER BOX ===== */
+.order-box {
+  margin: 20px auto;
+  background: #fff;
   padding: 30px;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
-/* ===== СПИСОК ТОВАРОВ ===== */
+/* ===== CART ===== */
 #cartItems {
   list-style: none;
   padding: 0;
   margin: 0 0 20px 0;
 }
 
-#cartItems li {
-  padding: 12px;
-  border-bottom: 1px solid #eee;
-  font-size: 15px;
+#cartItems div {
   display: flex;
   justify-content: space-between;
-}
-
-/* ===== ИТОГО БЛОК ===== */
-.order-box p {
-  font-size: 18px;
-  margin: 20px 0;
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-/* ===== INPUT СУММЫ ===== */
-#totalPrice {
-  width: 120px;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  text-align: center;
-  outline: none;
-}
-
-/* ===== КНОПКА ОПЛАТЫ ===== */
-button {
-  width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #2d89ef, #1b6fd6);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 15px;
-  transition: 0.2s ease;
-}
-
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(45,137,239,0.3);
-}
-
-/* ===== РЕЗУЛЬТАТ ОПЛАТЫ ===== */
-#result {
-  text-align: center;
-  margin-top: 25px;
-  font-size: 18px;
-}
-
-/* ===== УСПЕШНАЯ ОПЛАТА ===== */
-#result h2 {
-  font-size: 22px;
   margin-bottom: 10px;
 }
 
+/* buttons */
+#cartItems button {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
 
+#cartItems button:nth-child(2),
+#cartItems button:nth-child(3) {
+  background: #2d89ef;
+  color: white;
+}
 
+#cartItems button:last-child {
+  background: #ff4d4d;
+  color: white;
+}
+
+/* ===== TOTAL ===== */
+.order-box p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===== FORM ===== */
+.order-form {
+  margin: 20px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.order-form input,
+.order-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+/* ===== RESULT ===== */
+#result,
+#paymentResult {
+  display: none;
+  margin: 15px auto;
+  padding: 15px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+/* ===== CLEAR BUTTON ===== */
 .clear-btn {
   width: 100%;
   padding: 12px;
@@ -101,289 +127,4 @@ button:hover {
   color: white;
   border: none;
   border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.clear-btn:hover {
-  background: #d93636;
-}
-
-form {
-  max-width: 500px;
-  margin: 20px auto;
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-}
-
-form input,
-form textarea {
-  width: 100%;
-  margin-bottom: 12px;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
-}
-
-form textarea {
-  resize: none;
-  height: 80px;
-}
-
-form button {
-  width: 100%;
-  padding: 12px;
-  background: #2d89ef;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-form button:hover {
-  background: #1b6fd6;
-}
-
-.order-form {
-  max-width: 520px;
-  margin: 20px auto;
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-}
-
-.order-form h3 {
-  margin-bottom: 15px;
-  font-size: 18px;
-}
-
-/* инпуты внутри формы */
-.order-form input,
-.order-form textarea {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 12px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  font-size: 14px;
-  box-sizing: border-box;
-}
-
-.order-form textarea {
-  height: 90px;
-  resize: none;
-}
-
-/* кнопка формы */
-.order-form button {
-  width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #2d89ef, #1b6fd6);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.order-form button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(45,137,239,0.3);
-}
-
-#result {
-  display: none;
-
-  max-width: 520px;
-  margin: 20px auto;
-  padding: 15px;
-
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-
-  text-align: center;
-}
-
-#paymentResult {
-  display: none;
-
-  max-width: 520px;
-  margin: 20px auto;
-  padding: 15px;
-
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-
-  text-align: center;
-}
-
-/* ===== CART BUTTONS UNIFIED STYLE ===== */
-
-#cartItems button {
-  width: 28px;
-  height: 28px;
-
-  padding: 0;
-  margin: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 16px;
-  line-height: 1;
-
-  border-radius: 6px;
-
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-/* + button */
-#cartItems button:nth-child(2),
-#cartItems button:nth-child(3) {
-  background: #2d89ef;
-  color: white;
-  border: none;
-}
-
-/* hover + - */
-#cartItems button:nth-child(2):hover,
-#cartItems button:nth-child(3):hover {
-  background: #1b6fd6;
-}
-
-/* delete button (✕) */
-#cartItems button:last-child {
-  background: #ff4d4d;
-  color: white;
-  border: none;
-}
-
-#cartItems button:last-child:hover {
-  background: #d93636;
-}
-
-#cartItems div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-/* блок с + и − */
-#cartItems div > div {
-  display: flex;
-  align-items: center;
-  gap: 6px; /* 👈 отступ между +, number, - */
-}
-
-/* отступ между количеством и крестиком */
-#cartItems div > div + button {
-  margin-left: 10px;
-}
-
-/* ===== HEADER FROM MAIN SITE ===== */
-
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-
-  padding: 14px 20px;
-
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(10px);
-
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.logo-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  text-decoration: none;
-  color: #111;
-}
-
-.logo-img {
-  width: 42px;
-  height: 42px;
-  object-fit: contain;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.nav {
-  display: flex;
-  gap: 20px;
-}
-
-.nav a {
-  text-decoration: none;
-  color: #111;
-  font-weight: 500;
-}
-
-.nav a:hover {
-  color: #2563eb;
-}
-
-.search-box {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.search {
-  width: 400px;
-  max-width: 100%;
-
-  padding: 10px 12px;
-
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
-
-.search-btn {
-  width: 44px;
-  height: 44px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: none;
-  cursor: pointer;
-
-  background: #2563eb;
-  color: white;
-
-  border-radius: 8px;
-}
-
-.phone-header {
-  color: #1c1f26;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.phone-header:hover {
-  color: #2563eb;
 }
