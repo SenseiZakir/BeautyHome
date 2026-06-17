@@ -1,4 +1,12 @@
-/* css для карточки отдельного товара */
+/* =========================
+   PRODUCT PAGE ONLY (CLEAN)
+========================= */
+
+/* НЕ ТРОГАЕМ HEADER — он в style.css */
+
+/* =========================
+   BODY
+========================= */
 
 body {
   margin: 0;
@@ -7,19 +15,27 @@ body {
   color: #1c1f26;
 }
 
-/* ===== HEADER ===== */
+/* =========================
+   PAGE WRAPPER
+========================= */
 
-
-
-
-/* ===== PAGE ===== */
 .product-page {
   max-width: 1100px;
   margin: 20px auto;
   padding: 20px;
 }
 
-/* ===== HERO ===== */
+/* скрытие страницы (JS загрузка) */
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+}
+
+/* =========================
+   HERO
+========================= */
+
 .product-hero {
   text-align: center;
   margin-bottom: 20px;
@@ -36,14 +52,20 @@ body {
   color: #2563eb;
 }
 
-/* ===== LAYOUT (ВАЖНО: ВЕРТИКАЛЬНО) ===== */
+/* =========================
+   LAYOUT
+========================= */
+
 .product-gallery {
   display: flex;
-  flex-direction: column; /* 👈 ВСЁ СНИЗУ */
+  flex-direction: column;
   gap: 12px;
 }
 
-/* ===== MAIN IMAGE ===== */
+/* =========================
+   MAIN IMAGE
+========================= */
+
 .main-image img {
   width: 100%;
   height: 450px;
@@ -54,21 +76,23 @@ body {
   border: 1px solid #e5e7eb;
 }
 
-/* ===== THUMBNAILS (СНИЗУ КАК В МАГАЗИНЕ) ===== */
+/* =========================
+   THUMBNAILS
+========================= */
+
 .thumbnails {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 
-/* КВАДРАТНЫЕ МИНИАТЮРЫ */
 .thumbnails img {
-  width: 75px;     /* 👈 чуть больше */
-  height: 75px;    /* 👈 квадрат */
+  width: 75px;
+  height: 75px;
 
   object-fit: cover;
-
   border-radius: 10px;
+
   cursor: pointer;
 
   border: 2px solid transparent;
@@ -77,22 +101,26 @@ body {
   transition: 0.2s;
 }
 
-/* hover эффект */
 .thumbnails img:hover {
   transform: scale(1.06);
   border-color: #2563eb;
 }
 
-/* активная */
 .thumbnails img.active {
   border-color: #111;
   transform: scale(1.06);
 }
 
-/* ===== INFO BLOCK ===== */
+/* =========================
+   INFO BLOCK
+========================= */
+
 .product-info {
+  margin-top: 20px;
+
   background: #fff;
   padding: 20px;
+
   border-radius: 12px;
   border: 1px solid #e5e7eb;
 }
@@ -112,7 +140,10 @@ body {
   margin-bottom: 6px;
 }
 
-/* BUTTONS */
+/* =========================
+   BUTTONS
+========================= */
+
 .product-info button {
   width: 100%;
   padding: 12px;
@@ -133,6 +164,7 @@ body {
   background: #333;
 }
 
+/* WhatsApp */
 .whatsapp-btn {
   display: block;
   text-align: center;
@@ -153,15 +185,30 @@ body {
   background: #1ebd57;
 }
 
-.hidden {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease;
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .main-image img {
+    height: 300px;
+  }
+
+  .thumbnails {
+    justify-content: center;
+  }
+
+  .thumbnails img {
+    width: 65px;
+    height: 65px;
+  }
 }
 
-/* ===== HEADER FROM MAIN SITE ===== */
+/* =========================
+   FIX HEADER ONLY FOR PRODUCT PAGE
+========================= */
 
-.header {
+.product-body .header {
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -173,64 +220,44 @@ body {
 
   padding: 14px 20px;
 
-  background: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
 
   border-bottom: 1px solid #e5e7eb;
 }
 
-.logo-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  text-decoration: none;
-  color: #111;
-}
-
-.logo-img {
-  width: 42px;
-  height: 42px;
-  object-fit: contain;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.nav {
+.product-body .nav {
   display: flex;
   gap: 20px;
 }
 
-.nav a {
+.product-body .nav a {
+  background: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  color: #111 !important;
   text-decoration: none;
-  color: #111;
   font-weight: 500;
 }
 
-.nav a:hover {
+.product-body .nav a:hover {
   color: #2563eb;
 }
 
-.search-box {
+.product-body .search-box {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.search {
+.product-body .search {
   width: 400px;
-  max-width: 100%;
-
   padding: 10px 12px;
-
   border: 1px solid #ddd;
   border-radius: 8px;
 }
 
-.search-btn {
+.product-body .search-btn {
   width: 44px;
   height: 44px;
 
@@ -247,24 +274,8 @@ body {
   border-radius: 8px;
 }
 
-.phone-header {
+.product-body .phone-header {
   color: #1c1f26;
-  text-decoration: none;
   font-weight: 500;
-}
-
-.phone-header:hover {
-  color: #2563eb;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  .thumbnails {
-    justify-content: center;
-  }
-
-  .thumbnails img {
-    width: 70px;
-    height: 70px;
-  }
+  text-decoration: none;
 }
