@@ -292,4 +292,423 @@ function initHeaderSearch() {
 
 document.addEventListener("DOMContentLoaded", initHeaderSearch);
 
+/* =========================
+   HEADER CATALOG SCROLL
+========================= */
+const catalogLink = document.getElementById("catalogLink");
+
+if (catalogLink) {
+  catalogLink.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const catalog = document.getElementById("catalog");
+
+    if (catalog) {
+      catalog.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  });
+}
+
+const translations = {
+  ru: {
+    home: "Главная",
+    catalog: "Каталог",
+    cart: "Корзина",
+    services: "Услуги",
+    delivery: "Доставка",
+    contacts: "Контакты"
+  },
+
+  kg: {
+    home: "Башкы бет",
+    catalog: "Каталог",
+    cart: "Себет",
+    services: "Кызматтар",
+    delivery: "Жеткирүү",
+    contacts: "Байланыш"
+  }
+};
+
+function setLanguage(lang) {
+
+  document.querySelectorAll("[data-lang]").forEach(el => {
+
+    const key = el.dataset.lang;
+
+    if (translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+
+  });
+
+  // Поиск в шапке
+  const headerSearch = document.getElementById("headerSearch");
+  if (headerSearch) {
+    headerSearch.placeholder =
+      lang === "kg"
+        ? "Эмерек издөө..."
+        : "Поиск мебели...";
+  }
+
+  // Большой баннер
+  const bannerTitle = document.getElementById("bannerTitle");
+  const bannerText = document.getElementById("bannerText");
+  const bannerBtn = document.getElementById("bannerCatalogBtn");
+
+  if (bannerTitle) {
+    bannerTitle.textContent =
+      lang === "kg"
+        ? "Кыялыңыздагы үйдү түзүңүз"
+        : "Создайте дом своей мечты";
+  }
+
+  if (bannerText) {
+    bannerText.textContent =
+      lang === "kg"
+        ? "Жайлуу жашоо үчүн заманбап эмерек"
+        : "Современная мебель для комфортной жизни";
+  }
+
+  if (bannerBtn) {
+    bannerBtn.textContent =
+      lang === "kg"
+        ? "Каталогду көрүү"
+        : "Смотреть каталог";
+  }
+
+  // Фильтры
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput) {
+    searchInput.placeholder =
+      lang === "kg"
+        ? "Товар издөө"
+        : "Поиск товара";
+  }
+
+  const applyBtn = document.getElementById("applyFilters");
+  if (applyBtn) {
+    applyBtn.textContent =
+      lang === "kg"
+        ? "Колдонуу"
+        : "Применить";
+  }
+
+  const resetBtn = document.getElementById("resetFilters");
+  if (resetBtn) {
+    resetBtn.textContent =
+      lang === "kg"
+        ? "Тазалоо"
+        : "Сбросить";
+  }
+
+  localStorage.setItem("lang", lang);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const savedLang =
+    localStorage.getItem("lang") || "ru";
+
+  setLanguage(savedLang);
+
+  document
+    .getElementById("ruBtn")
+    ?.addEventListener("click", () => {
+      setLanguage("ru");
+    });
+
+  document
+    .getElementById("kgBtn")
+    ?.addEventListener("click", () => {
+      setLanguage("kg");
+    });
+
+});
+
+translations.ru = {
+  ...translations.ru,
+
+  catalog: "Каталог",
+
+  bannerTitle: "Создайте дом своей мечты",
+  bannerText: "Современная мебель для комфортной жизни",
+  bannerBtn: "Смотреть каталог",
+
+  searchPlaceholder: "Поиск мебели...",
+
+  aboutTitle: "О компании Beauty Home",
+
+  aboutText1:
+    "Beauty Home — это современная мебель для дома, созданная с заботой о комфорте и стиле.",
+
+  aboutText2:
+    "Мы предлагаем кровати, диваны, консоли, тумбы, столики и другую мебель высокого качества по доступным ценам.",
+
+  aboutText3:
+    "Наша цель — помочь каждому клиенту создать уютный интерьер своей мечты.",
+
+  whyUs: "Почему выбирают нас",
+
+  adv1: "🛋 Качественная мебель",
+  adv2: "🚚 Быстрая доставка",
+  adv3: "💰 Доступные цены",
+  adv4: "🛠 Гарантия 1 год",
+
+  filters: "Фильтры",
+
+  productSearch: "Поиск товара",
+  priceFrom: "Цена от",
+  priceTo: "Цена до",
+
+  apply: "Применить",
+  reset: "Сбросить",
+
+  addCart: "В корзину"
+};
+
+translations.kg = {
+  ...translations.kg,
+
+  catalog: "Каталог",
+
+  bannerTitle: "Кыялыңыздагы үйдү түзүңүз",
+  bannerText: "Жайлуу жашоо үчүн заманбап эмерек",
+  bannerBtn: "Каталогду көрүү",
+
+  searchPlaceholder: "Эмерек издөө...",
+
+  aboutTitle: "Beauty Home жөнүндө",
+
+  aboutText1:
+    "Beauty Home — үй үчүн заманбап жана ыңгайлуу эмеректерди сунуштайт.",
+
+  aboutText2:
+    "Биз керебеттерди, дивандарды, консольдорду, тумбаларды жана башка сапаттуу эмеректерди сунуштайбыз.",
+
+  aboutText3:
+    "Биздин максат — ар бир кардардын кыялындагы интерьерин түзүүгө жардам берүү.",
+
+  whyUs: "Эмне үчүн бизди тандашат",
+
+  adv1: "🛋 Сапаттуу эмерек",
+  adv2: "🚚 Ыкчам жеткирүү",
+  adv3: "💰 Жеткиликтүү баалар",
+  adv4: "🛠 1 жыл кепилдик",
+
+  filters: "Чыпкалар",
+
+  productSearch: "Товар издөө",
+  priceFrom: "Баасы баштап",
+  priceTo: "Баасы чейин",
+
+  apply: "Колдонуу",
+  reset: "Тазалоо",
+
+  addCart: "Себетке кошуу"
+};
+
+function translateProducts(lang) {
+
+  document.querySelectorAll("[data-ru][data-kg]").forEach(el => {
+
+    if(lang === "kg"){
+      el.textContent = el.dataset.kg;
+    } else {
+      el.textContent = el.dataset.ru;
+    }
+
+  });
+
+}
+
+
+const oldSetLanguage = setLanguage;
+
+
+setLanguage = function(lang){
+
+  oldSetLanguage(lang);
+
+  translateProducts(lang);
+
+}
+
+function translateFilters(lang){
+
+
+  // option категорий
+  document.querySelectorAll("#categoryFilter option").forEach(option=>{
+
+    if(option.dataset.ru && option.dataset.kg){
+
+      option.textContent =
+      lang === "kg"
+      ? option.dataset.kg
+      : option.dataset.ru;
+
+    }
+
+  });
+
+
+  // сортировка
+  const sort = document.getElementById("sortPrice");
+
+  if(sort){
+
+    sort.options[0].textContent =
+    lang === "kg"
+    ? "Сортировка жок"
+    : "Без сортировки";
+
+
+    sort.options[1].textContent =
+    lang === "kg"
+    ? "Баасы ↑"
+    : "Цена ↑";
+
+
+    sort.options[2].textContent =
+    lang === "kg"
+    ? "Баасы ↓"
+    : "Цена ↓";
+
+  }
+
+
+  // цена
+  const min =
+  document.getElementById("minPrice");
+
+  const max =
+  document.getElementById("maxPrice");
+
+
+  if(min){
+
+    min.placeholder =
+    lang === "kg"
+    ? "Баасы баштап"
+    : "Цена от";
+
+  }
+
+
+  if(max){
+
+    max.placeholder =
+    lang === "kg"
+    ? "Баасы чейин"
+    : "Цена до";
+
+  }
+
+
+}
+
+
+const oldTranslateProducts = translateProducts;
+
+
+translateProducts = function(lang){
+
+ oldTranslateProducts(lang);
+
+ translateFilters(lang);
+
+}
+
+function translateContacts(lang){
+
+  document.querySelectorAll(
+    ".contacts-page [data-ru][data-kg]"
+  ).forEach(el=>{
+
+    if(lang === "kg"){
+      el.textContent = el.dataset.kg;
+    } else {
+      el.textContent = el.dataset.ru;
+    }
+
+  });
+
+}
+
+
+const oldSetLanguage2 = setLanguage;
+
+
+setLanguage = function(lang){
+
+  oldSetLanguage2(lang);
+
+  translateProducts(lang);
+
+  translateFilters(lang);
+
+  translateContacts(lang);
+
+}
+
+function translatePages(lang){
+
+  document.querySelectorAll("[data-ru][data-kg]").forEach(el=>{
+
+    if(lang === "kg"){
+      el.textContent = el.dataset.kg;
+    } else {
+      el.textContent = el.dataset.ru;
+    }
+
+  });
+
+}
+
+
+const oldSetLanguageFinal = setLanguage;
+
+setLanguage = function(lang){
+
+  oldSetLanguageFinal(lang);
+
+  translateProducts(lang);
+
+  translateFilters(lang);
+
+  translatePages(lang);
+
+}
+
+function translatePlaceholders(lang){
+
+document.querySelectorAll("[data-ru-placeholder]").forEach(el=>{
+
+el.placeholder =
+lang === "kg"
+? el.dataset.kgPlaceholder
+: el.dataset.ruPlaceholder;
+
+});
+
+}
+
+
+const oldSetLanguage3 = setLanguage;
+
+
+setLanguage = function(lang){
+
+  oldSetLanguage3(lang);
+
+  translateProducts(lang);
+
+  translateFilters(lang);
+
+  translateContacts(lang);
+
+  translatePlaceholders(lang);
+
+}
 
