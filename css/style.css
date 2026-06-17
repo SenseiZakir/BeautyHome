@@ -672,15 +672,24 @@ select:focus {
 }
 
 .phone-header {
-  margin-left: auto;
+  margin-left: 0;
   color: #1c1f26;
   font-weight: 500;
   text-decoration: none;
   font-size: 16px;
+  white-space: nowrap;
 }
 
 .phone-header:hover {
   color: #2563eb;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 10px;
 }
 
 .card .track img {
@@ -690,6 +699,40 @@ select:focus {
 
 .card .track img:hover {
   transform: scale(1.03);
+}
+
+.lang-switcher {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.lang-switcher button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 45px;
+  height: 35px;
+
+  background: white;
+  color: #111;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  font-weight: 600;
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.lang-switcher button:hover {
+  background: #f3f4f6;
 }
 
 @keyframes shimmer {
@@ -782,11 +825,6 @@ select:focus {
     padding: 30px 20px;
   }
 
-  .story-grid div {
-    font-size: 14px;
-    padding: 15px;
-  }
-}
   .story-grid div {
     font-size: 14px;
     padding: 15px;
