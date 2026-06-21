@@ -1,5 +1,4 @@
 const page = document.querySelector(".product-page");
-if (page) page.classList.add("hidden");
 
 const params = new URLSearchParams(window.location.search);
 const id = Number(params.get("id"));
@@ -13,10 +12,92 @@ if (!product) {
 /* =========================
    PRODUCT INFO
 ========================= */
-document.querySelector("h1").textContent = product.title;
-document.querySelector(".price").textContent = product.price + " сом";
-document.querySelector(".description").textContent = product.description;
 
+const title = document.querySelector("h1");
+
+title.textContent = product.title;
+
+title.dataset.ru = product.title;
+title.dataset.kg = product.kg || product.title;
+
+
+document.querySelector(".price").textContent =
+product.price + " сом";
+
+
+const desc = document.querySelector(".description");
+
+desc.textContent = product.description;
+
+desc.dataset.ru = product.description;
+desc.dataset.kg = product.descriptionKg || product.description;
+
+/* =========================
+   FEATURES
+========================= */
+
+const features = document.getElementById("productFeatures");
+
+features.innerHTML = `
+
+<li 
+data-ru="Материал: ЛДСП"
+data-kg="Материал: ЛДСП">
+Материал: ЛДСП
+</li>
+
+
+<li
+data-ru="Каркас: ЛДСП"
+data-kg="Каркас: ЛДСП">
+Каркас: ЛДСП
+</li>
+
+
+<li
+data-ru="Стиль: Современный"
+data-kg="Стиль: Заманбап">
+Стиль: Современный
+</li>
+
+
+<li
+data-ru="Цвет: На выбор"
+data-kg="Түсү: Тандоо боюнча">
+Цвет: На выбор
+</li>
+
+
+<li
+data-ru="Гарантия: 12 месяцев"
+data-kg="Кепилдик: 12 ай">
+Гарантия: 12 месяцев
+</li>
+
+
+<li
+data-ru="Страна: Кыргызстан"
+data-kg="Өлкө: Кыргызстан">
+Страна: Кыргызстан
+</li>
+
+`;
+
+const currentLang =
+localStorage.getItem("lang") || "ru";
+
+if(currentLang === "kg"){
+
+  title.textContent = title.dataset.kg;
+
+  desc.textContent = desc.dataset.kg;
+
+  document.querySelectorAll("#productFeatures li")
+  .forEach(el=>{
+    el.textContent = el.dataset.kg;
+  });
+
+}
 /* =========================
    MAIN IMAGE
 ========================= */
@@ -81,9 +162,30 @@ if (addToCartBtn) {
 }
 
 /* =========================
+   WHATSAPP BUTTON
+========================= */
+
+const whatsappBtn = document.getElementById("whatsappBtn");
+
+if (whatsappBtn) {
+
+  const phone = "77075732940"; // твой номер
+
+  const message =
+`Здравствуйте! Хочу заказать товар:
+
+${product.title}
+
+Цена: ${product.price} сом`;
+
+  whatsappBtn.href =
+    `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+}
+/* =========================
    TOAST
 ========================= */
-let toastTimer;
+let productToastTimer;
 
 function showToast(message) {
   let toast = document.getElementById("toast");
@@ -107,7 +209,7 @@ function showToast(message) {
   toast.style.boxShadow = "0 10px 25px rgba(0,0,0,0.15)";
   toast.style.zIndex = "9999";
 
-  clearTimeout(toastTimer);
+  clearTimeout(productToastTimer);
 
   toast.style.transition = "none";
   toast.style.opacity = "0";
@@ -119,7 +221,7 @@ function showToast(message) {
   toast.style.opacity = "1";
   toast.style.transform = "translateY(0)";
 
-  toastTimer = setTimeout(() => {
+  productToastTimer = setTimeout(() => {
     toast.style.opacity = "0";
     toast.style.transform = "translateY(20px)";
   }, 1500);
@@ -128,6 +230,6 @@ function showToast(message) {
 /* =========================
    SHOW PAGE
 ========================= */
-window.addEventListener("load", () => {
-  if (page) page.classList.remove("hidden");
-});
+if (page) {
+  page.classList.remove("hidden");
+}
