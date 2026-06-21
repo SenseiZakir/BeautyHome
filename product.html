@@ -11,7 +11,7 @@
 
 <header class="header">
 
-  <a href="index.html" class="logo-wrap">
+  <a href="index.html" class="logo-wrap homeLink">
 
     <img
       src="images/Logo.png"
@@ -25,32 +25,75 @@
 
   </a>
 
+
   <div class="search-box">
 
     <input
       type="text"
       class="search"
+      id="headerSearch"
       placeholder="Поиск мебели..."
     >
 
-    <button class="search-btn">
+    <button id="searchBtn" class="search-btn">
       🔍
     </button>
 
   </div>
 
-  <nav class="nav">
-    <a href="index.html">Главная</a>
-    <a href="index.html#catalog">Каталог</a>
-    <a href="checkout.html">Корзина</a>
-    <a href="services.html">Услуги</a>
-    <a href="delivery.html">Доставка</a>
-    <a href="contacts.html">Контакты</a>
-  </nav>
 
-  <a href="tel:+996555123456" class="phone-header">
-    📞 +996 555 123 456
+
+  <nav class="nav">
+
+  <a href="index.html" class="nav-link" data-lang="home">
+    Главная
   </a>
+
+  <a href="index.html#catalog" class="nav-link" data-lang="catalog">
+    Каталог
+  </a>
+
+  <a href="checkout.html" class="nav-link" data-lang="cart">
+    Корзина
+  </a>
+
+  <a href="services.html" class="nav-link" data-lang="services">
+    Услуги
+  </a>
+
+  <a href="delivery.html" class="nav-link" data-lang="delivery">
+    Доставка
+  </a>
+
+  <a href="contacts.html" class="nav-link" data-lang="contacts">
+    Контакты
+  </a>
+
+</nav>
+
+
+
+  <div class="header-right">
+
+    <a href="tel:+996555123456" class="phone-header">
+      📞 +996 555 123 456
+    </a>
+
+
+    <div class="lang-switcher">
+
+      <button id="ruBtn">
+        RU
+      </button>
+
+      <button id="kgBtn">
+        KG
+      </button>
+
+    </div>
+
+  </div>
+
 
 </header>
 
@@ -58,8 +101,17 @@
 
   <!-- HERO -->
   <div class="product-hero">
-    <h1></h1>
-    <p class="price"></p>
+    <h1 
+class="product-title"
+data-ru=""
+data-kg="">
+</h1>
+
+<p 
+class="price"
+data-ru=""
+data-kg="">
+</p>
   </div>
 
   <!-- ГАЛЕРЕЯ -->
@@ -73,31 +125,35 @@
 
   </div>
 
+
+
+<p class="description"></p>
+  
   <!-- ОПИСАНИЕ -->
   <div class="product-info">
 
-    <p class="description"></p>
+    <p 
+class="description"
+data-ru=""
+data-kg="">
+</p>
 
-    <ul>
-      <li>Материал: </li>
-      <li>Каркас: ЛДСП</li>
-      <li>Стиль: Современный</li>
-      <li>Цвет: На выбор</li>
-      <li>Гарантия: 12 месяцев</li>
-      <li>Страна: Кыргызстан</li>
-    </ul>
+    <ul id="productFeatures">
+
+</ul>
 
     <button id="addToCartBtn">
       Добавить в корзину
     </button>
 
     <a
-      href="https://wa.me/996XXXXXXXXX"
-      target="_blank"
-      class="whatsapp-btn"
-    >
-      Заказать в WhatsApp
-    </a>
+  href="#"
+  target="_blank"
+  class="whatsapp-btn"
+  id="whatsappBtn"
+>
+  Заказать в WhatsApp
+</a>
 
   </div>
 
@@ -106,8 +162,8 @@
 
 
 <script src="js/products.js"></script>
-<script src="js/product.js"></script>
 <script src="js/main.js"></script>
+<script src="js/product.js"></script>
 
 </body>
 </html>
