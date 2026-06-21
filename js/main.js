@@ -1,5 +1,17 @@
 let isSearching = false;
 
+function normalizeText(text){
+
+  return text
+    .toLowerCase()
+    .replace(/й/g,"и")
+    .replace(/ы/g,"и")
+    .replace(/я/g,"а")
+    .replace(/ь/g,"")
+    .trim();
+
+}
+
 /* =========================
    CART
 ========================= */
@@ -28,7 +40,7 @@ function addToCart(name, price, image) {
 /* =========================
    TOAST (ОДИН)
 ========================= */
-let toastTimer;
+window.toastTimer = null;
 
 function showToast(message) {
   let toast = document.getElementById("toast");
@@ -52,7 +64,7 @@ function showToast(message) {
   toast.style.boxShadow = "0 10px 25px rgba(0,0,0,0.15)";
   toast.style.zIndex = "9999";
 
-  clearTimeout(toastTimer);
+  clearTimeout(window.toastTimer);
 
   toast.style.transition = "none";
   toast.style.opacity = "0";
@@ -64,7 +76,7 @@ function showToast(message) {
   toast.style.opacity = "1";
   toast.style.transform = "translateY(0)";
 
-  toastTimer = setTimeout(() => {
+  window.toastTimer = setTimeout(() => {
     toast.style.opacity = "0";
     toast.style.transform = "translateY(20px)";
   }, 1200);
@@ -209,7 +221,23 @@ function initFilters() {
       const price = Number(card.dataset.price || 0);
       const cat = card.dataset.category || "";
 
-      const matchSearch = !search || title.includes(search);
+      
+
+
+const searchWords = search.split(" ");
+
+const keywords = (
+  title + " " +
+  (card.dataset.keywords || "")
+).toLowerCase();
+
+
+const matchSearch = searchWords.every(word =>
+  normalizeText(keywords)
+.includes(
+ normalizeText(word)
+)
+);
       const matchCat = !category || cat === category;
       const matchPrice = price >= minPrice && price <= maxPrice;
 
@@ -257,59 +285,96 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function initHeaderSearch() {
+
   const btn = document.getElementById("searchBtn");
   const input = document.getElementById("headerSearch");
 
   if (!btn || !input) return;
 
+
   function findProductAndOpen() {
+
     const query = input.value.trim().toLowerCase();
+
     if (!query) return;
 
-    // ищем товар в массиве products
+
     const found = products.find(p => {
-      return (
-        p.title.toLowerCase().includes(query) ||
-        (p.keywords && p.keywords.some(k => k.toLowerCase().includes(query)))
-      );
+
+      const text =
+        p.title +
+        " " +
+        (p.keywords ? p.keywords.join(" ") : "");
+
+      return normalizeText(text)
+      .includes(normalizeText(query));
+
     });
 
-    if (found) {
-      window.location.href = `product.html?id=${found.id}`;
+
+    if(found){
+
+      window.location.href =
+      `product.html?id=${found.id}`;
+
     } else {
+
       alert("Товар не найден");
+
     }
+
   }
+
 
   btn.addEventListener("click", findProductAndOpen);
 
-  input.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
+
+  input.addEventListener("keydown", e => {
+
+    if(e.key === "Enter"){
       findProductAndOpen();
     }
+
   });
+
 }
+
 
 document.addEventListener("DOMContentLoaded", initHeaderSearch);
 
 /* =========================
    HEADER CATALOG SCROLL
 ========================= */
-const catalogLink = document.getElementById("catalogLink");
 
-if (catalogLink) {
-  catalogLink.addEventListener("click", (e) => {
-    e.preventDefault();
+document.querySelectorAll("#catalogLink").forEach(link => {
+
+  link.addEventListener("click", function(e){
 
     const catalog = document.getElementById("catalog");
 
-    if (catalog) {
+
+    // если мы на главной
+    if(catalog){
+
+      e.preventDefault();
+
       catalog.scrollIntoView({
-        behavior: "smooth"
+        behavior:"smooth"
       });
+
     }
+
+    // если мы НЕ на главной
+    else {
+
+      window.location.href = "index.html#catalog";
+
+    }
+
+
   });
-}
+
+});
 
 const translations = {
   ru: {
@@ -667,19 +732,43 @@ function translatePages(lang){
 }
 
 
-const oldSetLanguageFinal = setLanguage;
-
 setLanguage = function(lang){
 
-  oldSetLanguageFinal(lang);
+  oldSetLanguage(lang);
 
   translateProducts(lang);
 
   translateFilters(lang);
 
+  translateContacts(lang);
+
   translatePages(lang);
 
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const links = document.querySelectorAll(".nav-link");
+
+  links.forEach(link => {
+
+    link.onclick = function(e){
+
+      const href = this.getAttribute("href");
+
+      if(href === "services.html"){
+        window.location.href = "services.html";
+      }
+
+      if(href === "delivery.html"){
+        window.location.href = "delivery.html";
+      }
+
+    }
+
+  });
+
+});
 
 function translatePlaceholders(lang){
 
@@ -695,20 +784,104 @@ lang === "kg"
 }
 
 
-const oldSetLanguage3 = setLanguage;
+function translateProductPage(lang){
 
+  const title = document.querySelector(".product-hero h1");
+  const desc = document.querySelector(".description");
 
-setLanguage = function(lang){
+  if(title && title.dataset.ru && title.dataset.kg){
+    title.textContent =
+      lang === "kg"
+        ? title.dataset.kg
+        : title.dataset.ru;
+  }
 
-  oldSetLanguage3(lang);
+  if(desc && desc.dataset.ru && desc.dataset.kg){
+    desc.textContent =
+      lang === "kg"
+        ? desc.dataset.kg
+        : desc.dataset.ru;
+  }
 
-  translateProducts(lang);
+  document
+    .querySelectorAll("#productFeatures li")
+    .forEach(li => {
 
-  translateFilters(lang);
+      if(!li.dataset.ru || !li.dataset.kg) return;
 
-  translateContacts(lang);
-
-  translatePlaceholders(lang);
-
+      li.textContent =
+        lang === "kg"
+          ? li.dataset.kg
+          : li.dataset.ru;
+    });
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+
+  const savedLang =
+    localStorage.getItem("lang") || "ru";
+
+  translateProductPage(savedLang);
+
+});
+
+/* =========================
+   AUTO KEYWORDS AFTER LOAD
+========================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  document.querySelectorAll(".card").forEach(card => {
+
+    const category = card.dataset.category;
+
+
+    const keywords = {
+
+      "Банкетки":
+      "банкетка банкетки отургуч отургучтар bench",
+
+      "Пуфы будуарные":
+      "пуф пуфы будуардук пуфтар pouf",
+
+      "Туалетные столики":
+      "туалетный столик косметикалык столдор",
+
+      "Кровати":
+      "кровать кровати керебет керебеттер bed",
+
+      "Консоли":
+      "консоль консоли консолдор console",
+
+      "Кресла и стулья":
+      "кресло кресла стул стулья креслолор отургучтар",
+
+      "Диваны":
+      "диван диваны дивандар sofa",
+
+      "Тумбы":
+      "тумба тумбы тумбалар",
+
+      "Столики":
+      "стол столик столики столдор",
+
+      "Пуфы":
+      "пуф пуфы пуфтар",
+
+      "Подвесные консоли":
+      "подвесная консоль илме консолдор",
+
+      "Прикроватные тумбы":
+      "прикроватная тумба керебет жанындагы тумбалар",
+
+      "ТВ-Тумбы":
+      "тв тумба телевизордук тумба"
+
+    };
+
+
+    card.dataset.keywords = keywords[category] || "";
+
+  });
+
+});
