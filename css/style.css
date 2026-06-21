@@ -744,90 +744,650 @@ select:focus {
   }
 }
 
-/* =========================
-   RESPONSIVE (VERY IMPORTANT)
-========================= */
+/* PRODUCT HEADER SAME AS HOME */
 
-/* планшет */
-@media (max-width: 1024px) {
-  .products {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.product-body .header {
+  position: sticky;
+  top:0;
 }
 
-@media (max-width: 768px) {
+
+.product-body .header-right {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+}
+
+
+
+/* планшеты */
+
+@media(max-width:992px){
+
+
+.product-body .header{
+
+ flex-wrap:wrap;
+ justify-content:center;
+
+}
+
+
+.product-body .logo-wrap{
+
+ width:100%;
+ justify-content:center;
+
+}
+
+
+.product-body .search-box{
+
+ order:2;
+ width:100%;
+ justify-content:center;
+
+}
+
+
+.product-body .search{
+
+ width:100%;
+ max-width:600px;
+
+}
+
+
+.product-body .nav{
+
+ order:3;
+ width:100%;
+ justify-content:center;
+
+}
+
+
+.product-body .header-right{
+
+ order:4;
+ flex-direction:row;
+ justify-content:center;
+ width:100%;
+
+}
+
+
+}
+
+
+
+/* телефоны */
+
+@media(max-width:600px){
+
+
+.product-body .header{
+
+ flex-direction:column;
+ align-items:stretch;
+
+}
+
+
+.product-body .search-box{
+
+ width:100%;
+}
+
+
+.product-body .search{
+
+ width:100%;
+}
+
+
+.product-body .nav{
+
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ text-align:center;
+
+}
+
+
+.product-body .header-right{
+
+ flex-direction:row;
+ justify-content:center;
+
+}
+
+
+}
+
+/* =========================
+   RESPONSIVE ALL DEVICES
+========================= */
+
+
+/* ===== большие планшеты / маленькие ноутбуки ===== */
+
+@media (max-width: 1200px) {
+
+  .header {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+
+  .search-box {
+    flex: 1;
+    max-width: 600px;
+  }
+
+
+  .search {
+    width: 100%;
+  }
+
+
+  .products {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+
+  .about-company {
+    gap: 30px;
+    padding: 0 30px;
+  }
+
+
+  .big-banner h1 {
+    font-size: 42px;
+  }
+
+}
+
+
+
+/* ===== планшеты ===== */
+
+@media (max-width: 992px) {
+
+
+  .header {
+    padding: 12px;
+    gap: 12px;
+  }
+
+
+  .logo-wrap {
+    width: 100%;
+    justify-content: center;
+  }
+
+
+  .search-box {
+    width: 100%;
+    order: 2;
+  }
+
+
+  .search {
+    flex: 1;
+    width: 100%;
+  }
+
+
+  .search-btn {
+    flex-shrink: 0;
+  }
+
+
+
+  .nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+
+  .header-right {
+    order: 4;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+
+
+
   .catalog {
     flex-direction: column;
   }
+
 
   .filters {
     width: 100%;
   }
 
+
   .products {
-    grid-template-columns: 1fr;
-  }
-
-  .hero h1 {
-    font-size: 28px;
-  }
-}
-
-/* маленькие телефоны */
-@media (max-width: 480px) {
-  .products {
-    grid-template-columns: 1fr;
-  }
-
-  .header {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .nav {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 768px) {
-  .about-company {
-    flex-direction: column;
-    gap: 30px;
-  }
-
-  .about-image img {
-    height: 300px;
-  }
-
-  .about-content h2 {
-    font-size: 28px;
-  }
-
-  .about-content p {
-    font-size: 16px;
-  }
-}
-
-/* 📱 планшет */
-@media (max-width: 1024px) {
-  .story-grid {
+    width: 100%;
     grid-template-columns: repeat(2, 1fr);
   }
+
+
+
+  .slider {
+    height: 240px;
+  }
+
+
+  .about-company {
+    flex-direction: column;
+  }
+
+
+  .about-image img {
+    height: 350px;
+  }
+
+
+
+  .story-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+
 }
 
-/* 📱 телефон */
+
+
+/* ===== телефоны ===== */
+
 @media (max-width: 600px) {
-  .story-grid {
-    grid-template-columns: 1fr;
+
+
+  body {
+    overflow-x: hidden;
   }
+
+
+
+  .header {
+
+    flex-direction: column;
+    align-items: stretch;
+
+    padding: 10px;
+
+  }
+
+
+
+  .logo-wrap {
+
+    justify-content: center;
+
+  }
+
+
+
+  .logo {
+    font-size: 18px;
+  }
+
+
+
+  /* поиск занимает всю ширину */
+
+  .search-box {
+
+    width: 100%;
+    display: flex;
+
+  }
+
+
+  .search {
+
+    min-width: 0;
+    width: 100%;
+
+    font-size: 14px;
+
+  }
+
+
+  .search-btn {
+
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+  }
+
+
+
+  .nav {
+
+    display: grid;
+
+    grid-template-columns: repeat(2,1fr);
+
+    text-align: center;
+
+    gap: 10px;
+
+  }
+
+
+  .nav-link {
+
+    font-size: 13px;
+
+  }
+
+
+
+  .header-right {
+
+    flex-direction: column;
+
+  }
+
+
+  .phone-header {
+
+    font-size: 14px;
+
+  }
+
+
+
+  .big-banner {
+
+    height: auto;
+
+    padding: 40px 20px;
+
+  }
+
+
+  .big-banner h1 {
+
+    font-size: 30px;
+
+  }
+
+
+
+  .catalog {
+
+    padding: 10px;
+
+  }
+
+
+
+  .products {
+
+    grid-template-columns: 1fr;
+
+    gap: 15px;
+
+  }
+
+
+
+  .card {
+
+    width: 100%;
+
+  }
+
+
+
+  .slider {
+
+    height: 220px;
+
+    width: 100%;
+
+  }
+
+
+
+  .track {
+
+    width: 100%;
+
+  }
+
+
+
+  .track img {
+
+    width: 100%;
+    object-fit: contain;
+
+  }
+
+
+
+  .prev,
+  .next {
+
+    width: 34px;
+    height: 34px;
+
+    font-size: 14px;
+
+  }
+
+
+
+  .about-company {
+
+    margin: 40px auto;
+
+    padding: 0 15px;
+
+  }
+
+
+
+  .about-image img {
+
+    height: 260px;
+
+  }
+
+
+
+  .about-content h2 {
+
+    font-size: 26px;
+
+  }
+
+
 
   .story {
-    padding: 30px 20px;
+
+    padding: 30px 15px;
+
   }
 
-  .story-grid div {
-    font-size: 14px;
-    padding: 15px;
+
+
+  .story-grid {
+
+    grid-template-columns: 1fr;
+
   }
+
+
 }
 
+
+
+/* ===== очень маленькие телефоны ===== */
+
+@media (max-width: 380px) {
+
+
+  .logo {
+
+    font-size: 16px;
+
+  }
+
+
+  .search {
+
+    font-size: 13px;
+
+  }
+
+
+  .search-btn {
+
+    width: 38px;
+
+  }
+
+
+  .nav {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+
+  .slider {
+
+    height: 190px;
+
+  }
+
+
+
+  .card h3 {
+
+    font-size: 14px;
+
+  }
+
+
+}
+
+/* планшеты */
+
+@media(max-width:992px){
+
+
+.product-body .header{
+
+ flex-wrap:wrap;
+ justify-content:center;
+
+}
+
+
+.product-body .logo-wrap{
+
+ width:100%;
+ justify-content:center;
+
+}
+
+
+.product-body .search-box{
+
+ order:2;
+ width:100%;
+ justify-content:center;
+
+}
+
+
+.product-body .search{
+
+ width:100%;
+ max-width:600px;
+
+}
+
+
+.product-body .nav{
+
+ order:3;
+ width:100%;
+ justify-content:center;
+
+}
+
+
+.product-body .header-right{
+
+ order:4;
+ flex-direction:row;
+ justify-content:center;
+ width:100%;
+
+}
+
+
+}
+
+
+
+/* телефоны */
+
+@media(max-width:600px){
+
+
+.product-body .header{
+
+ flex-direction:column;
+ align-items:stretch;
+
+}
+
+
+.product-body .search-box{
+
+ width:100%;
+}
+
+
+.product-body .search{
+
+ width:100%;
+}
+
+
+.product-body .nav{
+
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ text-align:center;
+
+}
+
+
+.product-body .header-right{
+
+ flex-direction:row;
+ justify-content:center;
+
+}
+
+
+}
