@@ -64,6 +64,58 @@ document.addEventListener("DOMContentLoaded", () => {
           "true"
         );
 
+        const name =
+document.getElementById("customerName").value;
+
+const phone =
+document.getElementById("customerPhone").value;
+
+const address =
+document.getElementById("customerAddress").value;
+
+const comment =
+document.getElementById("customerComment").value;
+
+const total =
+document.getElementById("totalPrice").innerText;
+
+let cart =
+JSON.parse(localStorage.getItem("cart")) || [];
+
+let products = cart
+  .map(item =>
+    `${item.name} x ${item.quantity}`
+  )
+  .join("\n");
+
+const message =
+
+`Новый заказ BeautyHome
+
+Имя: ${name}
+
+Телефон: ${phone}
+
+Адрес: ${address}
+
+Комментарий: ${comment}
+
+Товары:
+${products}
+
+Итого: ${total} сом`;
+
+const whatsappNumber =
+"77075732940"; // сюда свой номер
+
+const whatsappUrl =
+`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+window.open(
+  whatsappUrl,
+  "_blank"
+);
+
 
         result.innerHTML = `
 
@@ -350,12 +402,14 @@ JSON.parse(localStorage.getItem("cart")) || [];
 if(!cart[index]) return;
 
 
+// уменьшаем/увеличиваем количество
 cart[index].quantity += delta;
 
 
-if(cart[index].quantity <= 0){
+// ниже 1 не опускаем
+if(cart[index].quantity < 1){
 
-cart.splice(index,1);
+  cart[index].quantity = 1;
 
 }
 
