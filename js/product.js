@@ -5,6 +5,39 @@ const id = Number(params.get("id"));
 
 const product = products.find(p => p.id === id);
 
+/* =========================
+   SEO
+========================= */
+
+document.title =
+product.seoTitle ||
+`${product.title} в Бишкеке — Beauty Home`;
+
+let metaDescription =
+document.querySelector('meta[name="description"]');
+
+if (metaDescription) {
+  metaDescription.setAttribute(
+    "content",
+    product.seoDescription ||
+    product.description
+  );
+}
+
+let metaKeywords =
+document.querySelector('meta[name="keywords"]');
+
+if (metaKeywords) {
+  metaKeywords.setAttribute(
+    "content",
+    [
+      product.title,
+      "мебель Бишкек",
+      ...(product.keywords || [])
+    ].join(", ")
+  );
+}
+
 if (!product) {
   document.body.innerHTML = "<h1>Товар не найден</h1>";
 }
