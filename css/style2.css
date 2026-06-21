@@ -48,29 +48,59 @@ h1 {
 }
 
 /* ===== CART ===== */
+
 #cartItems {
   list-style: none;
   padding: 0;
   margin: 0 0 20px 0;
 }
 
-#cartItems div {
+#cartItems > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
 }
 
-/* buttons */
+#cartItems > div:last-child {
+  border-bottom: none;
+}
+
+#cartItems > div > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#cartItems > div > div:last-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Кнопки + - X */
+
 #cartItems button {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
   border: none;
   border-radius: 6px;
+
   cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
 }
 
-#cartItems button:nth-child(2),
+#cartItems button:first-child,
 #cartItems button:nth-child(3) {
   background: #2d89ef;
   color: white;
@@ -127,4 +157,214 @@ h1 {
   color: white;
   border: none;
   border-radius: 10px;
+}
+
+/* =========================
+   PRODUCT RESPONSIVE
+========================= */
+
+
+/* большие планшеты */
+@media (max-width: 1100px) {
+
+  .product-page {
+    max-width: 900px;
+    padding: 15px;
+  }
+
+
+  .main-image img {
+    height: 380px;
+  }
+
+
+  .product-body .search {
+    width: 300px;
+  }
+
+}
+
+
+/* планшеты */
+
+@media (max-width: 768px) {
+
+
+  .product-page {
+    width: 100%;
+    padding: 12px;
+    margin: 10px auto;
+  }
+
+
+  .product-hero h1 {
+    font-size: 24px;
+  }
+
+
+  .main-image img {
+    height: 300px;
+  }
+
+
+
+  .product-body .header {
+
+    flex-wrap: wrap;
+    justify-content: center;
+
+    padding: 10px;
+
+  }
+
+
+  .product-body .logo-wrap {
+
+    width: 100%;
+    justify-content: center;
+
+  }
+
+
+
+  .product-body .search-box {
+
+    width: 100%;
+
+  }
+
+
+
+  .product-body .search {
+
+    width: 100%;
+    min-width: 0;
+
+  }
+
+
+
+  .product-body .search-btn {
+
+    flex-shrink: 0;
+
+  }
+
+
+
+  .product-body .nav {
+
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+
+  }
+
+
+
+  .product-body .header-right {
+
+    width: 100%;
+    align-items: center;
+
+  }
+
+
+}
+
+
+/* телефоны */
+
+@media (max-width: 600px) {
+
+
+  .main-image img {
+
+    height: 240px;
+
+  }
+
+
+
+  .product-info {
+
+    padding: 15px;
+
+  }
+
+
+
+  .description {
+
+    font-size: 14px;
+
+  }
+
+
+
+  .thumbnails {
+
+    gap: 8px;
+
+  }
+
+
+
+  .thumbnails img {
+
+    width: 55px;
+    height: 55px;
+
+  }
+
+
+
+  .product-info button,
+  .whatsapp-btn {
+
+    font-size: 14px;
+
+  }
+
+
+}
+
+
+/* маленькие телефоны */
+
+@media (max-width: 380px) {
+
+
+  .product-hero h1 {
+
+    font-size: 20px;
+
+  }
+
+
+
+  .main-image img {
+
+    height: 200px;
+
+  }
+
+
+
+  .thumbnails img {
+
+    width: 48px;
+    height: 48px;
+
+  }
+
+
+  .product-body .nav {
+
+    flex-direction: column;
+    align-items: center;
+
+  }
+
 }
