@@ -106,7 +106,7 @@ ${products}
 Итого: ${total} сом`;
 
 const whatsappNumber =
-"77075732940"; // сюда свой номер
+"996707001000"; // сюда свой номер
 
 const whatsappUrl =
 `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
