@@ -202,7 +202,7 @@ const whatsappBtn = document.getElementById("whatsappBtn");
 
 if (whatsappBtn) {
 
-  const phone = "77075732940"; // твой номер
+  const phone = "996707001000"; // твой номер
 
   const message =
 `Здравствуйте! Хочу заказать товар:
